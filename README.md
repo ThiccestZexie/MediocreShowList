@@ -1,6 +1,15 @@
 # MyShows
 
-urghh Durrr
+A simple dynamic website used to learn React and store all my fav shows and movies.
 
-[] Add Movies from TMDB
-[] Add anime/manga with https://jikan.moe/
+# Further implementations
+
+- [x] Add Movies from TMDB
+
+- [ ] Add anime/manga with https://jikan.moe/
+
+- [ ] Persistant storage locally hosted
+
+- [ ] Persistant storage database held online?
+
+- [ ] Add Light Novels
