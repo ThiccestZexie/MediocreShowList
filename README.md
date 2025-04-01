@@ -13,3 +13,7 @@ A simple dynamic website used to learn React and store all my fav shows and movi
 - [ ] Persistant storage database held online?
 
 - [ ] Add Light Novels
+
+- [ ] Add more search/filter options
+
+- [ ] Update styling
