@@ -14,7 +14,10 @@ function ShowCard({ show }) {
   return (
     <div className="show-card">
       <div className="show-poster">
-        <img src={show.url} alt={show.title} />
+        <img
+          src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
+          alt={show.title}
+        />
         <div className="show-overlay">
           <button className="" favorite-btn onClick={onFavoriteClick}>
             ♡
@@ -24,7 +27,7 @@ function ShowCard({ show }) {
 
       <div className="show-info">
         <h3>{show.title}</h3>
-        <p>{show.release_date}</p>
+        <p>{show.release_date?.split("-")[0]}</p>
       </div>
     </div>
   );

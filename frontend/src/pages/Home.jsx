@@ -1,5 +1,6 @@
 import ShowCard from "../components/ShowCard";
-import { useState } from "react"; // HOOK
+import { useEffect, useState } from "react"; // HOOK
+import { searchMovies, getPopularMovies } from "../services/api";
 import "../css/Home.css";
 /**
  * TODO: Implement fuzzy search
@@ -8,52 +9,32 @@ import "../css/Home.css";
 function Home() {
   const [searchQuery, setSearchQuery] = useState(""); //Default value in (),
   // When the state changes the enire component is rerenderd
-  const shows = [
-    {
-      id: 1,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 1",
-      release_date: "2016",
-    },
-    {
-      id: 2,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 2",
-      release_date: "2016",
-    },
-    {
-      id: 3,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 3",
-      release_date: "2016",
-    },
-    {
-      id: 4,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 4",
-      release_date: "2016",
-    },
-    {
-      id: 5,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 5",
-      release_date: "2016",
-    },
-    {
-      id: 6,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 6",
-      release_date: "2016",
-    },
-    {
-      id: 7,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 7",
-      release_date: "2016",
-    },
-    {
-      id: 8,
-      title: "Mushoku Tensei - Jobless Reincarnation vol 8",
-      release_date: "2016",
-    },
-  ];
+  //const shows = getPopularMovies();
+
+  const [shows, setShows] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const loadPopularMovies = async () => {
+      try {
+        const popularMovies = await getPopularMovies();
+        setShows(popularMovies);
+      } catch (err) {
+        console.log(err);
+        setError("Failed to load shows...");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPopularMovies();
+  }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
     alert(searchQuery);
+    setSearchQuery("");
   };
   return (
     <div className="home">
