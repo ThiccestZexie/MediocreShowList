@@ -5,10 +5,15 @@
  */
 
 import "../css/ShowCard.css";
+import { useShowContext } from "../contexts/ShowConext";
 
 function ShowCard({ show }) {
-  function onFavoriteClick() {
-    alert("mewoing rn");
+  const { isFavorite, addToFavorites, removeFromFavorites } = useShowContext(); // Can take any value from the provider
+  const favorite = isFavorite(show.id);
+  function onFavoriteClick(e) {
+    e.preventDefault();
+    if (favorite) removeFromFavorites(show.id);
+    else addToFavorites(show);
   }
 
   return (
@@ -19,8 +24,11 @@ function ShowCard({ show }) {
           alt={show.title}
         />
         <div className="show-overlay">
-          <button className="" favorite-btn onClick={onFavoriteClick}>
-            ♡
+          <button
+            className={`favorite-btn ${favorite ? "active" : ""}`}
+            onClick={onFavoriteClick}
+          >
+            ♥
           </button>
         </div>
       </div>
