@@ -7,10 +7,10 @@ import "../css/Home.css";
  * Contains the entire homepage components and more.
  */
 function Home() {
-  const [searchQuery, setSearchQuery] = useState(""); //Default value in (),
   // When the state changes the enire component is rerenderd
   //const shows = getPopularMovies();
 
+  const [searchQuery, setSearchQuery] = useState(""); //Default value in (),
   const [shows, setShows] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -31,10 +31,24 @@ function Home() {
     loadPopularMovies();
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    alert(searchQuery);
-    setSearchQuery("");
+    // Remove empty string search
+    if (!searchQuery.trim()) return;
+    if (loading) return;
+    setLoading(true);
+    try {
+      const searchResults = await searchMovies(searchQuery);
+      setShows(searchResults);
+      setError(null);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to search movies...");
+    } finally {
+      setLoading(false);
+    }
+
+    // setSearchQuery(""); Include if you want
   };
   return (
     <div className="home">
@@ -50,12 +64,19 @@ function Home() {
           Search
         </button>
       </form>
-      <div className="movies-grid">
-        {shows.map((show) => (
-          //show.title.toLowerCase().startsWith(searchQuery) &&
-          <ShowCard show={show} key={show.id} />
-        ))}
-      </div>
+
+      {error && <div className="error-message">{error}</div>}
+
+      {loading ? (
+        <div className="loading">Loading...</div>
+      ) : (
+        <div className="movies-grid">
+          {shows.map((show) => (
+            //show.title.toLowerCase().startsWith(searchQuery) &&
+            <ShowCard show={show} key={show.id} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
