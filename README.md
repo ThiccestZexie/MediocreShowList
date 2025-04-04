@@ -6,7 +6,7 @@ A simple dynamic website used to learn React and store all my fav shows and movi
 
 - [x] Add Movies from TMDB
 
-- [ ] Add anime/manga with https://jikan.moe/
+- [x] Add anime/manga with https://jikan.moe/
 
 - [ ] Remake home screen where its not a cess pool of shitty movies.
 
