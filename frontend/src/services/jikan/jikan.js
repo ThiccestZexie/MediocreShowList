@@ -17,20 +17,9 @@ export const getTopAnime = async (page) => {
     }));
 
     return filteredAnime;
+
   } catch (error) {
     console.error('Error fetching top anime:', error);
     throw error;
   }
 }
-
-// test
-const test = async () => {
-  try {
-    const data = await getTopAnime(2);
-    console.log(data);
-  } catch (error) {
-    console.error('Error in test:', error);
-  }
-}
-
-test(); // call the test function to see if it works
