@@ -10,6 +10,8 @@ export const getTopAnime = async (page) => {
 
     // Map out only the information you need:
     const filteredAnime = response.data.data.map(anime => ({
+      type: "anime",
+      id: anime.mal_id,
       url: anime.url,
       title: anime.title,
       year: anime.year, // or anime.aired?.prop?.from?.year if needed
@@ -22,4 +24,26 @@ export const getTopAnime = async (page) => {
     console.error('Error fetching top anime:', error);
     throw error;
   }
+}
+
+export const searchAnime = async (query) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/anime`, {
+      params: { q: query },
+    });
+    const filteredAnime= response.data.data.map(anime => ({
+      type: "anime",
+      id: anime.mal_id,
+      url: anime.url,
+      title: anime.title,
+      year: anime.year, // or anime.aired?.prop?.from?.year if needed
+      image: anime.images?.jpg?.image_url // extract the image url from the images object
+    }));
+    return filteredAnime;
+  }
+  catch (error) {
+    console.error('Error searching anime:', error);
+    throw error;
+  }
+
 }
