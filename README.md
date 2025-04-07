@@ -10,6 +10,8 @@ A simple dynamic website used to learn React and store all my fav shows and movi
 
 - [x] Merge ShowCard and AnimeCard
 
+- [ ] Clickable shows to see more information, write your own desc and raiting
+
 - [ ] Remake home screen where its not a cess pool of shitty movies.
 
 - [ ] Persistant storage locally hosted
