@@ -6,8 +6,9 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
  * 
  * @returns returns the popular movies from the tmdb api
  */
-export const getPopularMovies = async () => {
-  const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
+export const getPopularMovies = async (page = 1) => {
+  // fetch popular movies from tmdb api with page
+  const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}&page=${page}`);
   const data = await response.json();
   // update poster_path to use the full URL
   const movies = data.results.map((movie) => ({

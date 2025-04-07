@@ -14,21 +14,56 @@ function Home() {
   const [shows, setShows] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(1);
+
+  // useEffect(() => {
+  //   const loadPopularMovies = async () => {
+  //     try {
+  //       const popularMovies = await getPopularMovies(page);
+  //       setShows((prev) =>
+  //         page === 1 ? popularMovies : [...prev, ...popularMovies]
+  //       );
+  //     } catch (err) {
+  //       console.log(err);
+  //       setError("Failed to load shows...");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   loadPopularMovies();
+  // }, [page]);
+
+  const loadPopularMovies = async (pageNum) => {
+    try {
+      setLoading(true);
+      const popularMovies = await getPopularMovies(pageNum);
+      // Append new results to existing shows state
+      setShows((prev) => [...prev, ...popularMovies]);
+    } catch (err) {
+      console.log(err);
+      setError("Failed to load shows...");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const loadPopularMovies = async () => {
-      try {
-        const popularMovies = await getPopularMovies();
-        setShows(popularMovies);
-      } catch (err) {
-        console.log(err);
-        setError("Failed to load shows...");
-      } finally {
-        setLoading(false);
+    loadPopularMovies(page);
+  }, [page]);
+
+  // Infinite scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 100 >=
+        document.documentElement.offsetHeight
+      ) {
+        setPage((prevPage) => prevPage + 1);
       }
     };
-
-    loadPopularMovies();
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSearch = async (e) => {
@@ -71,9 +106,9 @@ function Home() {
         <div className="loading">Loading...</div>
       ) : (
         <div className="movies-grid">
-          {shows.map((show) => (
+          {shows.map((item, index) => (
             //show.title.toLowerCase().startsWith(searchQuery) &&
-            <ShowCard show={show} key={show.id} />
+            <ShowCard key={`${item.id}-${index}`} show={item} />
           ))}
         </div>
       )}
