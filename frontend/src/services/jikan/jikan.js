@@ -29,7 +29,11 @@ export const getTopAnime = async (page) => {
   }
 }
 
-
+/**
+ * 
+ * @param {searches with said query} query 
+ * @returns Returns the anime that matches the query from the jikan api
+ */
 export const searchAnime = async (query) => {
   try {
     const response = await axios.get(`${BASE_URL}/anime`, {

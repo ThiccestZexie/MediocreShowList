@@ -1,6 +1,11 @@
 const API_KEY = import.meta.env.VITE_API_KEY;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
+
+/**
+ * 
+ * @returns returns the popular movies from the tmdb api
+ */
 export const getPopularMovies = async () => {
   const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
   const data = await response.json();
@@ -11,7 +16,11 @@ export const getPopularMovies = async () => {
   }));
   return movies;
 };
-
+/**
+ * 
+ * @param {*} query 
+ * @returns searches for movies with the query
+ */
 export const searchMovies = async (query) => {
   const response = await fetch(
     `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
