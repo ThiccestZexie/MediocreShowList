@@ -8,6 +8,8 @@ A simple dynamic website used to learn React and store all my fav shows and movi
 
 - [x] Add anime/manga with https://jikan.moe/
 
+- [ ] Merge ShowCard and AnimeCard
+
 - [ ] Remake home screen where its not a cess pool of shitty movies.
 
 - [ ] Persistant storage locally hosted

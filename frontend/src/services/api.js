@@ -4,7 +4,12 @@ const BASE_URL = import.meta.env.VITE_BASE_URL;
 export const getPopularMovies = async () => {
   const response = await fetch(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
   const data = await response.json();
-  return data.results;
+  // update poster_path to use the full URL
+  const movies = data.results.map((movie) => ({
+    ...movie,
+    poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+  }));
+  return movies;
 };
 
 export const searchMovies = async (query) => {

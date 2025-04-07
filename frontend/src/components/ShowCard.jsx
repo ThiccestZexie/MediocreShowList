@@ -15,14 +15,10 @@ function ShowCard({ show }) {
     if (favorite) removeFromFavorites(show.id);
     else addToFavorites(show);
   }
-
   return (
     <div className="show-card">
       <div className="show-poster">
-        <img
-          src={`https://image.tmdb.org/t/p/w500${show.poster_path}`}
-          alt={show.title}
-        />
+        <img src={show.poster_path} alt={show.title} />
         <div className="show-overlay">
           <button
             className={`favorite-btn ${favorite ? "active" : ""}`}
@@ -35,7 +31,7 @@ function ShowCard({ show }) {
 
       <div className="show-info">
         <h3>{show.title}</h3>
-        <p>{show.release_date?.split("-")[0]}</p>
+        <p>{show.release_date}</p>
       </div>
     </div>
   );

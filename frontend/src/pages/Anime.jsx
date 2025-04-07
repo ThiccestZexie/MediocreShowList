@@ -1,7 +1,7 @@
-import AnimeCard from "../components/AnimeCard";
 import { useState, useEffect } from "react";
 import { getTopAnime, searchAnime } from "../services/jikan/jikan";
 import "../css/Home.css";
+import ShowCard from "../components/ShowCard";
 
 function Anime() {
   const [searchQuery, setSearchQuery] = useState(""); //Default value in (),
@@ -59,7 +59,7 @@ function Anime() {
       </form>
       <div className="movies-grid">
         {anime.map((anime) => (
-          <AnimeCard key={anime.id} anime={anime} />
+          <ShowCard key={anime.id} show={anime} />
         ))}
       </div>
     </div>
