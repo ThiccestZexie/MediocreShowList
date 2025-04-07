@@ -1,7 +1,11 @@
 // using axios to fetch data from the jikan api
 import axios from 'axios';
 const BASE_URL = 'https://api.jikan.moe/v4'; // for anime
-
+/**
+ * 
+ * @param {Page Wanted} page 
+ * @returns Returns the  anime on set page from the jikan api sorted by raiting
+ */
 export const getTopAnime = async (page) => {
   try {
     const response = await axios.get(`${BASE_URL}/top/anime`, {
@@ -24,6 +28,7 @@ export const getTopAnime = async (page) => {
     throw error;
   }
 }
+
 
 export const searchAnime = async (query) => {
   try {

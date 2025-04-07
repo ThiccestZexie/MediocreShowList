@@ -19,5 +19,9 @@ export const searchMovies = async (query) => {
     )}`
   );
   const data = await response.json();
-  return data.results;
+  const movies = data.results.map((movie) => ({
+    ...movie,
+    poster_path: `https://image.tmdb.org/t/p/w500${movie.poster_path}`,
+  }));
+  return movies;
 };

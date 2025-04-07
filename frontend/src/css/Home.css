@@ -55,10 +55,8 @@
   
   .movies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    padding: 1rem;
-    width: 100%;
-    box-sizing: border-box;
+    grid-template-columns: repeat(6, 200px); 
+    gap: 20px;
+    justify-content: center;
   }
 

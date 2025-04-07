@@ -1,4 +1,3 @@
-@import "tailwindcss";
 
 .favorites {
     padding: 2rem;
@@ -47,14 +46,11 @@
     transform: translateY(0);
   }
 }
-
 .movies-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  padding: 1rem;
-  width: 100%;
-  box-sizing: border-box;
+  grid-template-columns: repeat(auto-fill, 200px); /* each card gets 200px width */
+  gap: 20px; /* spacing between cards */
+  justify-content: center; /* center grid items */
 }
 
 .movies-grid > * {

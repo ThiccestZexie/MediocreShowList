@@ -10,11 +10,11 @@ function NavBar() {
         <Link to="/" className="nav-link">
           Home
         </Link>
-        <Link to="/favorites" className="nav-link">
-          Favorties
-        </Link>
         <Link to="/anime" className="nav-link">
           Anime
+        </Link>
+        <Link to="/favorites" className="nav-link">
+          Favorties
         </Link>
       </div>
     </nav>
